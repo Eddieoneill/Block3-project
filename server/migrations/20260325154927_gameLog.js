@@ -5,20 +5,15 @@
 exports.up = function (knex) {
   return knex.schema.createTable("game_logs", (table) => {
     table.increments();
-    table.string("name").notNullable().unique();
-    table.string("game_name");
+    table.string("game");
+    table.string("seed");
+    table.string("created_at").defaultTo(knex.fn.now());
     table.integer("user_id").unsigned();
-    table.integer("deck_id").unsigned();
 
     table
       .foreign("user_id")
       .references("id")
       .inTable("users")
-      .onDelete("SET NULL");
-    table
-      .foreign("deck_id")
-      .references("id")
-      .inTable("cards")
       .onDelete("SET NULL");
   });
 };
