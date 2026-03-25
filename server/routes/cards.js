@@ -1,9 +1,9 @@
 const express = require("express");
-const { getAll } = require("../controllers/cardsController");
+const { getAll, postNewGame } = require("../controllers/cardsController");
 
 const router = express();
 
 router.get("/", getAll);
-// router.get("/:id", getAllById);
+router.post("/shaffle", postNewGame);
 
 module.exports = router;
