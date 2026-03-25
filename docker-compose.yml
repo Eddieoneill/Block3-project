@@ -12,8 +12,8 @@ services:
       interval: 5s
       retries: 5
 
-  api:
-    build: ./api
+  server:
+    build: ./server
     ports:
       - "8000:8000"
     depends_on:
@@ -23,19 +23,19 @@ services:
       DB_HOST: db
       CHOKIDAR_USEPOLLING: "true"
     volumes:
-      - ./api:/src/app
+      - ./server:/src/app
       - /src/app/node_modules
     command: sh -c "npx knex migrate:latest && npx knex seed:run && npm run start"
 
-  ui:
-    build: ./ui
+  client:
+    build: ./client
     ports:
       - "3000:3000"
     depends_on:
-      - api
+      - server
     environment:
       VITE_API_URL: http://localhost:8000
       CHOKIDAR_USEPOLLING: "true"
     volumes:
-      - ./ui:/app
+      - ./client:/app
       - /app/node_modules

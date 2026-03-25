@@ -30,11 +30,11 @@ const cardsObj = [];
 
 numbers.forEach((number) => {
   suits.forEach((suit) => {
-    objs.push({
-      card_name: number + suit,
-      card_number: number,
-      card_suit: suit,
-      image: `https://deckofcardsapi.com/static/img/${number}${suit}.png`,
+    cardsObj.push({
+      code: number[0] + suit[0],
+      value: number,
+      suit: suit,
+      image: `https://deckofcardsapi.com/static/img/${number[0]}${suit[0]}.png`,
     });
   });
 });
