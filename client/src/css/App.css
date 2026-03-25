@@ -1,0 +1,22 @@
+.nav-container {
+  display: grid;
+  height: 5rem;
+  grid-template-columns: 25% 50% 25%;
+  background-color: rgb(172, 169, 32, 0.8);
+  border-radius: 5rem;
+  justify-content: center;
+  align-items: center;
+  place-items: center;
+}
+
+#page-title {
+  display: flex;
+  justify-self: center;
+  margin-left: 3rem;
+}
+
+.center-buttons {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  gap: 3rem;
+}
