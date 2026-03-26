@@ -8,6 +8,7 @@ const port = 8000;
 const userRoutes = require("./routes/users");
 const cardsRoutes = require("./routes/cards");
 const gameLogsRoutes = require("./routes/gameLogs");
+const authRoutes = require("./routes/auth");
 
 app.use(express.json());
 app.use(cookieParser());
@@ -16,6 +17,7 @@ app.use(cors());
 app.use("/users", userRoutes);
 app.use("/cards", cardsRoutes);
 app.use("/gameLogs", gameLogsRoutes);
+app.use("/auth", authRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).send({ message: "The API is up and running!" });
