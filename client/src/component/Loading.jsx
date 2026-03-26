@@ -11,11 +11,12 @@ function shuffleArray(arr) {
   return shuffled;
 }
 
-function Loading() {
+function Loading({ cards, setCards, slowLoading }) {
   const [backCardImage, setBackCardImage] = useState(null);
-  const [cards, setCards] = useState(null);
-  const elementRef = useRef(null);
+  const eRef = useRef(null);
   const imageElement = useRef(null);
+  const [elementRef, setElementRef] = useState(null);
+  const [randomCards, setRandomCards] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:8000/cards")
@@ -27,7 +28,8 @@ function Loading() {
             tempArr.push(card.image);
           }
         });
-        setCards(shuffleArray(tempArr));
+        setCards(tempArr);
+        setRandomCards(shuffleArray(tempArr));
       });
     fetch("http://localhost:8000/back")
       .then((data) => data.json())
@@ -37,14 +39,22 @@ function Loading() {
   }, []);
 
   useEffect(() => {
-    if (elementRef && cards) {
+    setElementRef(eRef);
+  }, [eRef]);
+
+  useEffect(() => {
+    if (elementRef && cards && !slowLoading) {
       animateFlip(0);
     }
-  }, [cards]);
+  }, [slowLoading, cards]);
 
   const animateFlip = (i) => {
+    if (slowLoading) {
+      elementRef.current.className = "card-sleeve";
+      return;
+    }
     if (cards.length <= i) {
-      setCards(shuffleArray(cards));
+      setRandomCards(shuffleArray(cards));
       animateFlip(0);
       return;
     }
@@ -54,7 +64,7 @@ function Loading() {
       setTimeout(() => animateFlip(i + 1), 1500);
     } else {
       elementRef.current.className = "card-sleeve flipped";
-      imageElement.current.src = cards[i];
+      imageElement.current.src = randomCards[i];
       setTimeout(() => animateFlip(i + 1), 1500);
     }
   };
@@ -63,7 +73,7 @@ function Loading() {
 
   return (
     <>
-      <div ref={elementRef} className="card-sleeve">
+      <div ref={eRef} className="card-sleeve">
         <div className="card-sleeve-inner">
           <div className="front">
             <img id="1" className="card" src={backCardImage} alt="backCard" />
@@ -73,7 +83,7 @@ function Loading() {
               ref={imageElement}
               id="2"
               className="card"
-              src={backCardImage}
+              src="https://deckofcardsapi.com/static/img/AS.png"
               alt="backCard"
             />
           </div>

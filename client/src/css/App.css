@@ -2,7 +2,7 @@
   display: grid;
   height: 5rem;
   grid-template-columns: 25% 50% 25%;
-  background-color: rgb(172, 169, 32, 0.8);
+  background-color: rgb(172, 169, 32, 0.6);
   border-radius: 5rem;
   justify-content: center;
   align-items: center;
@@ -19,4 +19,24 @@
   display: grid;
   grid-template-columns: 50% 50%;
   gap: 3rem;
+}
+
+.info-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  gap: 1rem;
+  margin-right: 3rem;
+}
+
+.info-button-container {
+  display: grid;
+  grid-template-rows: 50% 50%;
+  gap: 5px;
+  margin-left: 1rem;
+}
+.info-text-container {
+  display: grid;
+  grid-template-rows: 50% 50%;
+  gap: 5px;
+  margin-right: 5px;
 }

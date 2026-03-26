@@ -1,14 +1,25 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import playButtonHoverSound from "../support/buttonHoverSound";
 import "../css/App.css";
 
-function Navbar() {
+function Navbar({ setSlowLoading }) {
+  const navigate = useNavigate();
+
+  const pokerButtonClicked = () => {
+    setSlowLoading(false);
+    navigate("/poker");
+  };
+  const homeButtonClicked = () => {
+    setSlowLoading(false);
+    navigate("/");
+  };
   return (
     <>
       <nav className="nav-container">
         <div>
           <button
-            onClick={() => navigate("/")}
+            onClick={homeButtonClicked}
             onMouseEnter={playButtonHoverSound}
           >
             Home
@@ -16,7 +27,7 @@ function Navbar() {
         </div>
         <div className="center-buttons">
           <button
-            onClick={() => navigate("/")}
+            onClick={pokerButtonClicked}
             onMouseEnter={playButtonHoverSound}
           >
             Poker
@@ -28,13 +39,20 @@ function Navbar() {
             Blackjack
           </button>
         </div>
-        <div>
-          <button
-            onClick={() => navigate("/")}
-            onMouseEnter={playButtonHoverSound}
-          >
-            User
-          </button>
+        <div className="info-container">
+          <div className="info-text-container">
+            <div>Name:</div>
+            <div>Credit:00000000</div>
+          </div>
+          <div className="info-button-container">
+            <button>Add funs</button>
+            <button
+              onClick={() => navigate("/")}
+              onMouseEnter={playButtonHoverSound}
+            >
+              Log-out
+            </button>
+          </div>
         </div>
       </nav>
     </>

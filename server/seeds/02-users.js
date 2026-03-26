@@ -22,6 +22,6 @@ exports.seed = async function (knex) {
   // Deletes ALL existing entries
   await knex("users").del();
   await knex("users").insert(
-    await createUser("Admin", "Admin1234", "admin", 10000000),
+    await createUser("admin", "Admin1234", "admin", 10000000),
   );
 };

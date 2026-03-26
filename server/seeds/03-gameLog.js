@@ -6,7 +6,7 @@ const shaffleDeck = require("../support/shaffleDeck");
  */
 
 exports.seed = async function (knex) {
-  const [admin] = await knex("users").where({ username: "Admin" }).select("id");
+  const [admin] = await knex("users").where({ username: "admin" }).select("id");
 
   await knex("game_logs").del();
   await knex("game_logs").insert([
