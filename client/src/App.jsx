@@ -18,7 +18,7 @@ function App() {
     if (!slowLoading) {
       setTimeout(() => {
         setSlowLoading(true);
-      }, 4000);
+      }, 5000);
     }
   }, [slowLoading]);
 
@@ -37,7 +37,7 @@ function App() {
     );
   return (
     <AppContext.Provider value={{ user, cards, isLoggedIn, setIsLoggedIn }}>
-      <h1 id="page-title">Eddie's Casino</h1>
+      <h1 id="page-title">Freedom Casino</h1>
       <Navbar setSlowLoading={setSlowLoading} />
       <Routes>
         <Route path="/" element={<HomePage />} />

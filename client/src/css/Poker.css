@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  justify-content: center;
+  background-image: url("/pokerTable.png");
+  background-position-x: 50%;
+  background-position-y: 44%;
+  background-size: 130%;
+}
+
+.poker-container {
+  display: grid;
+  height: 43rem;
+  grid-template-rows: 11rem 11rem 11rem;
+  gap: 2rem;
+  margin-top: 6rem;
+}
+
+.player-container {
+  display: grid;
+  grid-template-columns: 9rem 9rem 9rem;
+  justify-content: center;
+  place-content: center;
+  align-content: center;
+  margin-left: 9rem;
+}
+
+.center-container {
+  display: grid;
+  grid-template-columns: 8rem 8rem 8rem 8rem 8rem;
+  justify-content: center;
+  place-content: center;
+  align-content: center;
+}

@@ -1,20 +1,22 @@
-.card {
+.card2 {
   width: 100%;
   height: 100%;
   border-radius: 1rem;
   object-fit: contain;
 }
 
-.card-sleeve {
-  width: 10rem;
-  height: 14rem;
-  margin: 0 auto;
-  border-radius: 1rem;
-  perspective: 1000px;
-  margin-top: 15rem;
+.card2.rotate {
+  transform: rotate(180deg);
 }
 
-.card-sleeve-inner {
+.card-sleeve2 {
+  width: 9rem;
+  height: 11rem;
+  margin: 0 auto;
+  perspective: 1000px;
+}
+
+.card-sleeve-inner2 {
   position: relative;
   width: 100%;
   height: 100%;
@@ -22,22 +24,20 @@
   transform-style: preserve-3d;
 }
 
-.card-sleeve.flipped .card-sleeve-inner {
-  transform: rotateY(540deg);
+.card-sleeve2.flipped .card-sleeve-inner2 {
+  transform: rotateY(180deg);
 }
 
-.back,
-.front {
+.back2,
+.front2 {
   position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+  border-radius: 1rem;
+  overflow: hidden;
 }
 
-.back {
+.back2 {
   transform: rotateY(180deg);
-}
-
-h1 {
-  justify-self: center;
 }

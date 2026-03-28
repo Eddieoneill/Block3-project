@@ -12,7 +12,8 @@ function shuffleArray(arr) {
 }
 
 function Loading({ cards, setCards, slowLoading }) {
-  const [backCardImage, setBackCardImage] = useState(null);
+  // const [backCardImage, setBackCardImage] = useState(null);
+  const backCardImage = "/BackCardImage.png";
   const eRef = useRef(null);
   const imageElement = useRef(null);
   const [elementRef, setElementRef] = useState(null);
@@ -23,19 +24,17 @@ function Loading({ cards, setCards, slowLoading }) {
       .then((data) => data.json())
       .then((cards) => {
         let tempArr = [];
-        cards.forEach((card, i) => {
-          if (i !== 0) {
-            tempArr.push(card.image);
-          }
+        cards.forEach((card) => {
+          tempArr.push(card.image);
         });
         setCards(tempArr);
         setRandomCards(shuffleArray(tempArr));
       });
-    fetch("http://localhost:8000/back")
-      .then((data) => data.json())
-      .then((back) => {
-        setBackCardImage(back.image);
-      });
+    // fetch("http://localhost:8000/back")
+    //   .then((data) => data.json())
+    //   .then((back) => {
+    //     setBackCardImage(back.image);
+    //   });
   }, []);
 
   useEffect(() => {
@@ -69,7 +68,7 @@ function Loading({ cards, setCards, slowLoading }) {
     }
   };
 
-  if (!backCardImage && !cards) return <div>Loading...</div>;
+  if (!cards) return <div>Loading...</div>;
 
   return (
     <>
@@ -83,7 +82,7 @@ function Loading({ cards, setCards, slowLoading }) {
               ref={imageElement}
               id="2"
               className="card"
-              src="https://deckofcardsapi.com/static/img/AS.png"
+              src={backCardImage}
               alt="backCard"
             />
           </div>

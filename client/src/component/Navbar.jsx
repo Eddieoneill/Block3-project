@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import AppContext from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
 import playButtonHoverSound from "../support/buttonHoverSound";
 import "../css/App.css";
 
 function Navbar({ setSlowLoading }) {
+  const { user } = useContext(AppContext);
+  const { credit, username } = user;
   const navigate = useNavigate();
 
   const pokerButtonClicked = () => {
@@ -41,8 +44,8 @@ function Navbar({ setSlowLoading }) {
         </div>
         <div className="info-container">
           <div className="info-text-container">
-            <div>Name:</div>
-            <div>Credit:00000000</div>
+            <div>Name: {username}</div>
+            <div>Credit: ${credit}</div>
           </div>
           <div className="info-button-container">
             <button>Add funs</button>
