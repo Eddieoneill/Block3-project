@@ -5,7 +5,13 @@ import Navbar from "./component/Navbar";
 import Loading from "./component/Loading";
 import Login from "./component/Login";
 import Poker from "./component/Poker";
+import ShowCards from "./component/ShowCards";
 import HomePage from "./component/HomePage";
+import {
+  playBackgroundMusic,
+  stopBackgroundMusic,
+  audio,
+} from "./support/backgroundMusic";
 import "./css/App.css";
 
 function App() {
@@ -15,10 +21,15 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    stopBackgroundMusic();
+    playBackgroundMusic();
+  }, [isLoggedIn]);
+
+  useEffect(() => {
     if (!slowLoading) {
       setTimeout(() => {
         setSlowLoading(true);
-      }, 5000);
+      }, 1000);
     }
   }, [slowLoading]);
 
@@ -36,12 +47,18 @@ function App() {
       />
     );
   return (
-    <AppContext.Provider value={{ user, cards, isLoggedIn, setIsLoggedIn }}>
+    <AppContext.Provider
+      value={{ user, cards, isLoggedIn, setIsLoggedIn, audio }}
+    >
       <h1 id="page-title">Freedom Casino</h1>
       <Navbar setSlowLoading={setSlowLoading} />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/poker" element={<Poker />} />
+        <Route
+          path="/poker"
+          element={<Poker setSlowLoading={setSlowLoading} />}
+        />
+        <Route path="/showcards" element={<ShowCards />} />
       </Routes>
     </AppContext.Provider>
   );

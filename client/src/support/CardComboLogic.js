@@ -16,6 +16,7 @@ class CardComboLogic {
       let cardValue = Number(card.value)
         ? card.value
         : `${CardComboLogic.faceCards[card.value]}`;
+      if (cardValue === 0) cardValue = 10;
       if (seen[`${cardValue}`] === undefined) {
         seen[`${cardValue}`] = 1;
       } else {
@@ -47,6 +48,7 @@ class CardComboLogic {
       let cardValue = Number(card.value)
         ? card.value
         : `${CardComboLogic.faceCards[card.value]}`;
+      if (cardValue === 0) cardValue = 10;
       if (seen[`${cardValue}`] === undefined) {
         seen[`${cardValue}`] = 1;
       } else {
@@ -80,6 +82,7 @@ class CardComboLogic {
       let cardValue = Number(card.value)
         ? card.value
         : `${CardComboLogic.faceCards[card.value]}`;
+      if (cardValue === 0) cardValue = 10;
       if (seen[`${cardValue}`] === undefined) {
         seen[`${cardValue}`] = 1;
       } else {
@@ -113,6 +116,7 @@ class CardComboLogic {
       let cardValue = Number(card.value)
         ? card.value
         : `${CardComboLogic.faceCards[card.value]}`;
+      if (cardValue === 0) cardValue = 10;
       if (seen[`${cardValue}`] === undefined) {
         seen[`${cardValue}`] = 1;
       } else if (seen[`${cardValue}`] < 2) {
@@ -152,6 +156,7 @@ class CardComboLogic {
       let cardValue = Number(card.value)
         ? Number(card.value)
         : CardComboLogic.faceCards[card.value];
+      if (cardValue === 0) cardValue = 10;
       if (seen[`${cardValue}`] === undefined) {
         seen[`${cardValue}`] = 1;
       } else {
@@ -179,7 +184,8 @@ class CardComboLogic {
     let newCards = cards.sort((a, b) => {
       let newA = Number(a.value) ? a.value : CardComboLogic.faceCards[a.value];
       let newB = Number(b.value) ? b.value : CardComboLogic.faceCards[b.value];
-
+      if (newA === 0) newA = 10;
+      if (newB === 0) newB = 10;
       return newA - newB;
     });
 
@@ -187,11 +193,13 @@ class CardComboLogic {
     let prev = Number(newCards[0].value)
       ? Number(newCards[0].value)
       : CardComboLogic.faceCards[newCards[0].value];
+    if (prev === 0) prev = 10;
 
     for (let i = 1; i < newCards.length; i++) {
       let cardValue = Number(newCards[i].value)
         ? Number(newCards[i].value)
         : CardComboLogic.faceCards[newCards[i].value];
+      if (cardValue === 0) cardValue = 10;
       if (cardValue === prev + 1 || (prev === 1 && cardValue === 13)) {
         straight.push(prev);
       } else if (cardValue === prev) {
@@ -248,6 +256,7 @@ class CardComboLogic {
       card.value = Number(card.value)
         ? Number(card.value)
         : CardComboLogic.faceCards[card.value];
+      if (card.value === 0) card.value = 10;
       if (straight.has(Number(card.value)) && card.suit === flashSuit) {
         checkSuit.push({ value: card.value, suit: card.suit });
       }
@@ -281,6 +290,7 @@ class CardComboLogic {
       card.value = Number(card.value)
         ? Number(card.value)
         : CardComboLogic.faceCards[card.value];
+      if (card.value === 0) card.value = 10;
       if (
         straight.has(card.value) &&
         card.suit === flashSuit &&
@@ -311,7 +321,7 @@ class CardComboLogic {
       }
     }
 
-    return highestCard;
+    return `${highestCard}`;
   }
   static getBestCombo(cards1, cards2, player) {
     let combinedCards = [];
@@ -322,43 +332,62 @@ class CardComboLogic {
     if (CardComboLogic.checkRoyalStraightFlush(combinedCards) !== false) {
       return [
         `${player} got Royal Flush!`,
-        CardComboLogic.checkRoyalStraightFlush(combinedCards),
+        `${CardComboLogic.checkRoyalStraightFlush(combinedCards)}`,
+        0,
       ];
     } else if (CardComboLogic.checkStraightFlush(combinedCards) !== false) {
       return [
         `${player} got Straight Flush!`,
-        CardComboLogic.checkStraightFlush(combinedCards),
+        `${CardComboLogic.checkStraightFlush(combinedCards)}`,
+        1,
       ];
     } else if (CardComboLogic.checkQuads(combinedCards) !== false) {
-      return [`${player} got Quads!`, CardComboLogic.checkQuads(combinedCards)];
+      return [
+        `${player} got Quads!`,
+        `${CardComboLogic.checkQuads(combinedCards)}`,
+        2,
+      ];
     } else if (CardComboLogic.checkFullHouse(combinedCards) !== false) {
       return [
         `${player} got Full House!`,
-        CardComboLogic.checkFullHouse(combinedCards),
+        `${CardComboLogic.checkFullHouse(combinedCards)}`,
+        3,
       ];
     } else if (CardComboLogic.checkFlush(combinedCards) !== false) {
-      return [`${player} got Flush!`, CardComboLogic.checkFlush(combinedCards)];
+      return [
+        `${player} got Flush!`,
+        `${CardComboLogic.checkFlush(combinedCards)}`,
+        4,
+      ];
     } else if (CardComboLogic.checkStraight(combinedCards) !== false) {
       return [
         `${player} got Straight!`,
-        CardComboLogic.checkStraight(combinedCards),
+        `${CardComboLogic.checkStraight(combinedCards)}`,
+        5,
       ];
     } else if (CardComboLogic.checkTriple(combinedCards) !== false) {
       return [
         `${player} got Three of a Kind!`,
-        CardComboLogic.checkTriple(combinedCards),
+        `${CardComboLogic.checkTriple(combinedCards)}`,
+        6,
       ];
     } else if (CardComboLogic.checkTwoPair(combinedCards) !== false) {
       return [
         `${player} got Two Pair!`,
-        CardComboLogic.checkTwoPair(combinedCards),
+        `${CardComboLogic.checkTwoPair(combinedCards)}`,
+        7,
       ];
     } else if (CardComboLogic.checkPair(combinedCards) !== false) {
-      return [`${player} got a Pair!`, CardComboLogic.checkPair(combinedCards)];
+      return [
+        `${player} got a Pair!`,
+        `${CardComboLogic.checkPair(combinedCards)}`,
+        8,
+      ];
     } else {
       return [
         `${player} got ${CardComboLogic.highCard(cards1)} High!`,
-        CardComboLogic.highCard(cards1),
+        `${CardComboLogic.highCard(cards1)}`,
+        9,
       ];
     }
   }
@@ -367,7 +396,7 @@ class CardComboLogic {
 let cards1 = [
   {
     value: "JACK",
-    suit: "HEARTS",
+    suit: "HEART",
   },
   {
     value: "10",
@@ -381,11 +410,11 @@ let cards2 = [
   },
   {
     value: "10",
-    suit: "HEARTS",
+    suit: "HEART",
   },
   {
     value: "KING",
-    suit: "HEARTS",
+    suit: "HEART",
   },
   {
     value: "QUEEN",

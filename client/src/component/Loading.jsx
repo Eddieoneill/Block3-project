@@ -25,7 +25,7 @@ function Loading({ cards, setCards, slowLoading }) {
       .then((cards) => {
         let tempArr = [];
         cards.forEach((card) => {
-          tempArr.push(card.image);
+          tempArr.push(card);
         });
         setCards(tempArr);
         setRandomCards(shuffleArray(tempArr));
@@ -63,7 +63,7 @@ function Loading({ cards, setCards, slowLoading }) {
       setTimeout(() => animateFlip(i + 1), 1500);
     } else {
       elementRef.current.className = "card-sleeve flipped";
-      imageElement.current.src = randomCards[i];
+      imageElement.current.src = randomCards[i].image;
       setTimeout(() => animateFlip(i + 1), 1500);
     }
   };

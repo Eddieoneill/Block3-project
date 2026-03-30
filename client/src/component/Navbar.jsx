@@ -14,14 +14,14 @@ function Navbar({ setSlowLoading }) {
     navigate("/poker");
   };
   const homeButtonClicked = () => {
-    setSlowLoading(false);
     navigate("/");
   };
   return (
     <>
       <nav className="nav-container">
-        <div>
+        <div className="left-container">
           <button
+            className="left-buttons"
             onClick={homeButtonClicked}
             onMouseEnter={playButtonHoverSound}
           >
@@ -40,6 +40,12 @@ function Navbar({ setSlowLoading }) {
             onMouseEnter={playButtonHoverSound}
           >
             Blackjack
+          </button>
+          <button
+            onClick={() => navigate("/Showcards")}
+            onMouseEnter={playButtonHoverSound}
+          >
+            Show Cards
           </button>
         </div>
         <div className="info-container">

@@ -56,20 +56,12 @@ export default function Login({ setIsLoggedIn, setSlowLoading, setUser }) {
     }
   };
 
-  const updateUserName = (event) => {
+  const enterPressed = (event) => {
     let key = event.key;
-    const temp = username;
     // console.log(usernameText.current.value);
-    if (key !== "Backspace" && key.length > 1) return;
-    if (key === "Backspace") {
-      temp.pop();
-      setUsername(temp);
-    } else {
-      temp.push(key);
-      setUsername(temp);
+    if (key === "Enter") {
+      loginButtonPressed();
     }
-
-    console.log("username", username);
   };
 
   const updatePassword = (event) => {
@@ -97,6 +89,7 @@ export default function Login({ setIsLoggedIn, setSlowLoading, setUser }) {
             className="login-text"
             id="userName"
             type="text"
+            onKeyDown={enterPressed}
             ref={usernameText}
           />
         </div>
@@ -106,6 +99,7 @@ export default function Login({ setIsLoggedIn, setSlowLoading, setUser }) {
             className="login-text"
             id="password"
             type="password"
+            onKeyDown={enterPressed}
             ref={passwordText}
           />
         </div>

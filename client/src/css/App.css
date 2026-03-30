@@ -1,8 +1,9 @@
 .nav-container {
+  margin-top: 6rem;
   display: grid;
   height: 5rem;
   grid-template-columns: 25% 50% 25%;
-  background-color: rgb(172, 169, 32, 0.6);
+  background-color: rgba(165, 35, 35, 0.6);
   border-radius: 5rem;
   justify-content: center;
   align-items: center;
@@ -11,12 +12,27 @@
 
 #page-title {
   display: flex;
+  position: fixed;
   justify-self: center;
+  top: 0;
+}
+
+.left-container {
+  display: flex;
+  justify-self: start;
+  margin-left: 7rem;
+}
+
+.left-buttons {
+  display: flex;
+  height: 2rem;
+  align-items: center;
 }
 
 .center-buttons {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 33% 33% 33%;
+  height: 2rem;
   gap: 3rem;
   justify-content: center;
 }
@@ -33,10 +49,14 @@
   display: grid;
   grid-template-rows: 50% 50%;
   gap: 5px;
+  align-items: center;
   margin-left: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 .info-text-container {
   display: grid;
   grid-template-rows: 50% 50%;
   margin-right: 5px;
+  margin-bottom: 1rem;
 }

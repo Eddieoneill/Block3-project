@@ -1,0 +1,8 @@
+.result-animation {
+  position: absolute;
+  top: 3;
+  left: 3;
+  width: 50%;
+  height: 50%;
+  margin-top: 5rem;
+}

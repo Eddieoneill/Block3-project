@@ -11,41 +11,40 @@ const fs = require("fs");
 //   image: "https://deckofcardsapi.com/static/img/back.png",
 // }
 const numbers = [
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "0",
-  "JACK",
-  "QUEEN",
-  "KING",
   "ACE",
+  "KING",
+  "QUEEN",
+  "JACK",
+  "0",
+  "9",
+  "8",
+  "7",
+  "6",
+  "5",
+  "4",
+  "3",
+  "2",
 ];
-const suits = ["SPADES", "DIAMONDS", "CLUBS", "HEARTS"];
+const suits = ["SPADE", "DIAMOND", "CLUB", "HEART"];
 // https://res.cloudinary.com/dysl9gnls/image/upload/0_SPADES.png
 const cardsObj = [];
 // image: `https://deckofcardsapi.com/static/img/${number[0]}${suit[0]}.png`,
-numbers.forEach((number) => {
-  suits.forEach((suit) => {
-    if (number === "JACK" && suits === "DIAMONDS") {
-      cardsObj.push({
-        code: number[0] + suit[0],
-        value: number,
-        suit: suit,
-        image: `https://res.cloudinary.com/dysl9gnls/image/upload/v1774667216/JACK_DIAMONDS.png`,
-      });
-    } else {
-      cardsObj.push({
-        code: number[0] + suit[0],
-        value: number,
-        suit: suit,
-        image: `https://res.cloudinary.com/dysl9gnls/image/upload/${number}_${suit}.png`,
-      });
-    }
+suits.forEach((suit) => {
+  numbers.forEach((number) => {
+    // if (number === "JACK" && suits === "DIAMONDS") {
+    //   cardsObj.push({
+    //     code: number[0] + suit[0],
+    //     value: number,
+    //     suit: suit,
+    //     image: `https://res.cloudinary.com/dysl9gnls/image/upload/JACK_DIAMOND.png`,
+    //   });
+    // } else {
+    cardsObj.push({
+      code: number[0] + suit[0],
+      value: number,
+      suit: suit,
+      image: `https://res.cloudinary.com/dysl9gnls/image/upload/${number}_${suit}.png`,
+    });
   });
 });
 

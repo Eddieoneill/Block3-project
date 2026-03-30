@@ -1,25 +1,28 @@
 import { useState, useEffect, useContext, useRef } from "react";
 import "../css/Card.css";
+import playCardFlipSound from "../support/cardFlipSound";
 import AppContext from "../context/AppContext";
 import post from "../support/post";
 import { useNavigate } from "react-router-dom";
 
-function Card({ card, isRotated }) {
+function Card({ setPlayerCard, card, rotate, cardName = "card2" }) {
   const backCardImage = "/BackCardImage.png";
   const eRef = useRef(null);
-  const rotateFront = useRef(null);
-  const rotateBack = useRef(null);
   const [elementRef, setElementRef] = useState(null);
 
   useEffect(() => {
+    if (!eRef) return;
     setElementRef(eRef);
-    if (isRotated) {
-      rotateFront.current.className = "card2 rotate";
-      rotateBack.current.className = "card2 rotate";
+    if (setPlayerCard) {
+      setPlayerCard(eRef);
     }
   }, [eRef]);
 
+  useEffect(() => {}, [rotate]);
+
   const cardClicked = () => {
+    if (!rotate) return;
+    playCardFlipSound();
     if (elementRef.current.className === "card-sleeve2 flipped") {
       elementRef.current.className = "card-sleeve2";
     } else {
@@ -27,20 +30,16 @@ function Card({ card, isRotated }) {
     }
   };
 
-  console.log(card);
+  if (!card) return;
+
   return (
     <div ref={eRef} className="card-sleeve2" onClick={cardClicked}>
       <div className="card-sleeve-inner2">
         <div className="front2">
-          <img
-            ref={rotateFront}
-            className="card2"
-            src={backCardImage}
-            alt="backCard"
-          />
+          <img className={cardName} src={backCardImage} alt="backCard" />
         </div>
         <div className="back2">
-          <img ref={rotateBack} className="card2" src={card} alt="backCard" />
+          <img className={cardName} src={card.image} alt="backCard" />
         </div>
       </div>
     </div>
