@@ -9,7 +9,7 @@ import DisplayResult from "./DisplayResult";
 import { useNavigate } from "react-router-dom";
 
 function Poker({ setSlowLoading }) {
-  const { user, cards } = useContext(AppContext);
+  const { user, setUser, cards } = useContext(AppContext);
   const [jsonSeed, setJsonSeed] = useState(null);
   const [seed, setSeed] = useState(null);
   const [gameRunning, setGameRunning] = useState(false);
@@ -26,6 +26,7 @@ function Poker({ setSlowLoading }) {
   const [botResult, setBotResult] = useState("");
   const [gameResult, setGameResult] = useState("");
   const [isRemoved, setIsRemoved] = useState(true);
+  const [betAmount, setBetAmount] = useState(0);
 
   const revealCenter = (i) => {
     if (rotateBot || rotateCenter) return;
@@ -38,10 +39,11 @@ function Poker({ setSlowLoading }) {
     centerCardsRef.current.childNodes[i].className = "card-sleeve2 flipped";
     setTimeout(() => revealCenter(i + 1), 500);
   };
-  const revealBot = (i) => {
+  const revealBot = async (i) => {
     if (i === 3) {
-      setRotateBot(true);
+      const updatedUser = { ...user };
       const result = revealGameResult(botCards, playerCards, centerCards);
+      setRotateBot(true);
       setBotResult(result.botResult);
       setPlayerResult(result.playerResult);
 
@@ -52,6 +54,19 @@ function Poker({ setSlowLoading }) {
         result.playerResult[2],
         user.username,
       );
+
+      if (gameResult.split(" ")[1] === "Won!") {
+        updatedUser.credit = user.credit + betAmount;
+        setUser(updatedUser);
+      } else if (gameResult.split(" ")[1] === "Lose...") {
+        updatedUser.credit = user.credit - betAmount;
+        setUser(updatedUser);
+      }
+
+      console.log(updatedUser.credit, gameResult);
+      await post(`http://localhost:8000/users/${user.id}`, {
+        credit: updatedUser.credit,
+      });
 
       setGameResult(gameResult);
       setIsRemoved(false);
@@ -70,6 +85,7 @@ function Poker({ setSlowLoading }) {
     setBotResult("");
     setPlayerResult("");
     setGameResult("");
+    setBetAmount(0);
     for (let i = 0; i < 5; i++) {
       centerCardsRef.current.childNodes[i].className = "card-sleeve2";
     }
@@ -84,6 +100,26 @@ function Poker({ setSlowLoading }) {
   const flipPlayerCards = () => {
     playerCard1.current.className = "card-sleeve2 flipped";
     playerCard2.current.className = "card-sleeve2 flipped";
+  };
+
+  const subtractBet = () => {
+    if (betAmount - 100 < 0) {
+      setBetAmount(0);
+    } else {
+      setBetAmount(betAmount - 100);
+    }
+  };
+
+  const addBet = () => {
+    if (betAmount + 100 > user.credit) {
+      setBetAmount(user.credit);
+    } else {
+      setBetAmount(betAmount + 100);
+    }
+  };
+
+  const betAll = () => {
+    setBetAmount(user.credit);
   };
 
   useEffect(() => {
@@ -145,15 +181,21 @@ function Poker({ setSlowLoading }) {
           <button id="reveal-button" onClick={() => revealCenter(0)}>
             Reveal
           </button>
-          <h2 id="game-result">{gameResult}</h2>
+          {/* <h2 id="game-result">{gameResult}</h2> */}
         </div>
         <div className="player-container">
           <div className="bet-container">
-            <h3>$:000</h3>
-            <button>ALL-IN</button>
+            <h3>$: {betAmount}</h3>
+            <button id="all-in" onClick={betAll}>
+              ALL-IN
+            </button>
             <div className="bet-button-container">
-              <button className="bet-button">-</button>
-              <button className="bet-button">+</button>
+              <button className="bet-button" onClick={subtractBet}>
+                -
+              </button>
+              <button className="bet-button" onClick={addBet}>
+                +
+              </button>
             </div>
           </div>
           <Card

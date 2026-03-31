@@ -58,6 +58,7 @@ function Loading({ cards, setCards, slowLoading }) {
       return;
     }
 
+    if (!elementRef.current) return;
     if (elementRef.current.className === "card-sleeve flipped") {
       elementRef.current.className = "card-sleeve";
       setTimeout(() => animateFlip(i + 1), 1500);

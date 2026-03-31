@@ -24,7 +24,11 @@ export default function Login({ setIsLoggedIn, setSlowLoading, setUser }) {
     });
 
     if (!postResult.message) {
-      setUser(postResult.user);
+      if (Array.isArray(postResult)) {
+        setUser(postResult[0]);
+      } else {
+        setUser(postResult);
+      }
       setIsLoggedIn(true);
       setSlowLoading(false);
       navigate("/");

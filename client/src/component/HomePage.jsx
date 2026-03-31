@@ -5,7 +5,10 @@ import "../css/HomePage.css";
 
 function HomePage() {
   const { user } = useContext(AppContext);
-  return <h1>Welcome {user.username} to FREEDOM Casino!</h1>;
+
+  return (
+    <h1 className="home-title">Welcome {user.username} to FREEDOM Casino!</h1>
+  );
 }
 
 export default HomePage;

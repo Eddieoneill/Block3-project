@@ -1,5 +1,5 @@
 const audio = new Audio("/BackgroundMusic.mp3");
-audio.volume = 0.002;
+audio.volume = 0.012;
 audio.loop = true;
 
 function playBackgroundMusic() {

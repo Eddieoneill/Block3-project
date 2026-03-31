@@ -20,6 +20,13 @@ function DisplayResult({ gameResult, isRemoved, setIsRemoved }) {
       onClick={() => removeSelf()}
     />
   );
+  const drawAnimation = (
+    <img
+      className="result-animation"
+      src="./Draw.gif"
+      onClick={() => removeSelf()}
+    />
+  );
 
   const removeSelf = () => {
     setIsRemoved(true);
@@ -29,8 +36,10 @@ function DisplayResult({ gameResult, isRemoved, setIsRemoved }) {
 
   if (gameResult.split(" ")[1] === "Won!") {
     return winAnimation;
-  } else {
+  } else if (gameResult.split(" ")[1] === "Lose...") {
     return lossAnimation;
+  } else {
+    return drawAnimation;
   }
 }
 

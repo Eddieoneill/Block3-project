@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import AppContext from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
 import playButtonHoverSound from "../support/buttonHoverSound";
@@ -6,7 +6,7 @@ import "../css/App.css";
 
 function Navbar({ setSlowLoading }) {
   const { user } = useContext(AppContext);
-  const { credit, username } = user;
+  const { credit, username } = Array.isArray(user) ? user[0] : user;
   const navigate = useNavigate();
 
   const pokerButtonClicked = () => {
@@ -16,6 +16,10 @@ function Navbar({ setSlowLoading }) {
   const homeButtonClicked = () => {
     navigate("/");
   };
+
+  useEffect(() => {
+    console.log(user.credit);
+  }, [user]);
   return (
     <>
       <nav className="nav-container">
@@ -54,7 +58,12 @@ function Navbar({ setSlowLoading }) {
             <div>Credit: ${credit}</div>
           </div>
           <div className="info-button-container">
-            <button>Add funs</button>
+            <button
+              onClick={() => navigate("/addfunds")}
+              onMouseEnter={playButtonHoverSound}
+            >
+              Add funs
+            </button>
             <button
               onClick={() => navigate("/")}
               onMouseEnter={playButtonHoverSound}

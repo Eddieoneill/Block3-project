@@ -7,6 +7,7 @@ import Login from "./component/Login";
 import Poker from "./component/Poker";
 import ShowCards from "./component/ShowCards";
 import HomePage from "./component/HomePage";
+import AddFunds from "./component/AddFunds";
 import {
   playBackgroundMusic,
   stopBackgroundMusic,
@@ -48,7 +49,7 @@ function App() {
     );
   return (
     <AppContext.Provider
-      value={{ user, cards, isLoggedIn, setIsLoggedIn, audio }}
+      value={{ user, setUser, cards, isLoggedIn, setIsLoggedIn, audio }}
     >
       <h1 id="page-title">Freedom Casino</h1>
       <Navbar setSlowLoading={setSlowLoading} />
@@ -59,6 +60,7 @@ function App() {
           element={<Poker setSlowLoading={setSlowLoading} />}
         />
         <Route path="/showcards" element={<ShowCards />} />
+        <Route path="/addfunds" element={<AddFunds />} />
       </Routes>
     </AppContext.Provider>
   );
