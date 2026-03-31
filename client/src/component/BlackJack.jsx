@@ -63,7 +63,6 @@ export default function BlackJack({ setSlowLoading }) {
   };
 
   const flipPlayerCards = () => {
-    console.log(botCardsRef.current.childNodes);
     botCardsRef.current.childNodes[1].className = "card-sleeve2 flipped";
     playerCard1.current.className = "card-sleeve2 flipped";
     playerCard2.current.className = "card-sleeve2 flipped";
@@ -93,8 +92,20 @@ export default function BlackJack({ setSlowLoading }) {
 
   const getAllCards = () => {
     if (botSumRef.current >= 17) {
-      if (botSum > playerSum) {
+      console.log(
+        "bot",
+        botSumRef.current,
+        "player",
+        playerSum,
+        botSumRef.current <= 21,
+      );
+      if (
+        (botSumRef.current > playerSum && botSumRef.current <= 21) ||
+        playerSum > 21
+      ) {
         setGameResult2("You Lose...");
+      } else if (botSumRef.current === playerSum) {
+        setGameResult2("Dwar");
       } else {
         setGameResult2("You Win!");
       }
@@ -203,7 +214,6 @@ export default function BlackJack({ setSlowLoading }) {
 
   useEffect(() => {
     if (!botSumCards) return;
-    console.log(getSum(botSumCards));
     setBotSum(getSum(botSumCards));
   }, [botSumCards]);
 

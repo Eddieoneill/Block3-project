@@ -6,7 +6,6 @@ import "../css/Poker.css";
 import CardComboLogic from "../support/CardComboLogic";
 import playCardFlipSound from "../support/cardFlipSound";
 import DisplayResult from "./DisplayResult";
-import { useNavigate } from "react-router-dom";
 
 function Poker({ setSlowLoading }) {
   const { user, setUser, cards } = useContext(AppContext);
