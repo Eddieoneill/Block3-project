@@ -1,0 +1,75 @@
+.container2 {
+  display: flex;
+  justify-content: center;
+  background-image: url("/pokerTable.png");
+  background-position-x: 50%;
+  background-position-y: 43%;
+  background-size: 125%;
+}
+
+.poker-container2 {
+  display: grid;
+  height: 43rem;
+  grid-template-rows: 11rem 11rem 11rem;
+  gap: 2rem;
+  margin-top: 6rem;
+}
+
+.player-container2 {
+  display: grid;
+  grid-template-columns: repeat(10, 4rem);
+  gap: 1rem;
+  justify-content: center;
+  place-content: center;
+  align-content: center;
+}
+
+.game-button2 {
+  display: flex;
+  width: fit-content;
+  justify-items: center;
+  align-items: center;
+}
+
+#newgame-button2 {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+}
+
+.bet-container2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: 2rem;
+}
+
+.bet-button-container2 {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  gap: 20%;
+}
+
+.bet-button2 {
+  display: flex;
+  height: 2rem;
+  width: 2rem;
+  margin-left: 10%;
+  margin-right: 10%;
+  justify-content: center;
+  align-items: center;
+  place-items: center;
+  font-size: 150%;
+}
+
+.game-result2 {
+  margin-left: 10rem;
+}
+
+.game-result {
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  font-size: 10rem;
+}

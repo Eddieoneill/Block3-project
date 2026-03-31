@@ -5,13 +5,17 @@ import playButtonHoverSound from "../support/buttonHoverSound";
 import "../css/App.css";
 
 function Navbar({ setSlowLoading }) {
-  const { user } = useContext(AppContext);
+  const { user, setIsLoggedIn } = useContext(AppContext);
   const { credit, username } = Array.isArray(user) ? user[0] : user;
   const navigate = useNavigate();
 
   const pokerButtonClicked = () => {
     setSlowLoading(false);
     navigate("/poker");
+  };
+  const blackjackButtonClicked = () => {
+    setSlowLoading(false);
+    navigate("/blackjack");
   };
   const homeButtonClicked = () => {
     navigate("/");
@@ -40,7 +44,7 @@ function Navbar({ setSlowLoading }) {
             Poker
           </button>
           <button
-            onClick={() => navigate("/")}
+            onClick={blackjackButtonClicked}
             onMouseEnter={playButtonHoverSound}
           >
             Blackjack
@@ -62,10 +66,10 @@ function Navbar({ setSlowLoading }) {
               onClick={() => navigate("/addfunds")}
               onMouseEnter={playButtonHoverSound}
             >
-              Add funs
+              Add funds
             </button>
             <button
-              onClick={() => navigate("/")}
+              onClick={() => setIsLoggedIn(false)}
               onMouseEnter={playButtonHoverSound}
             >
               Log-out

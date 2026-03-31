@@ -31,7 +31,6 @@ function Card({ setPlayerCard, card, rotate, cardName = "card2" }) {
   };
 
   if (!card) return;
-
   return (
     <div ref={eRef} className="card-sleeve2" onClick={cardClicked}>
       <div className="card-sleeve-inner2">
@@ -39,7 +38,7 @@ function Card({ setPlayerCard, card, rotate, cardName = "card2" }) {
           <img className={cardName} src={backCardImage} alt="backCard" />
         </div>
         <div className="back2">
-          <img className={cardName} src={card.image} alt="backCard" />
+          <img className={cardName} src={card.image} alt="frontCard" />
         </div>
       </div>
     </div>

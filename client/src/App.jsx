@@ -5,6 +5,7 @@ import Navbar from "./component/Navbar";
 import Loading from "./component/Loading";
 import Login from "./component/Login";
 import Poker from "./component/Poker";
+import BlackJack from "./component/BlackJack";
 import ShowCards from "./component/ShowCards";
 import HomePage from "./component/HomePage";
 import AddFunds from "./component/AddFunds";
@@ -30,7 +31,7 @@ function App() {
     if (!slowLoading) {
       setTimeout(() => {
         setSlowLoading(true);
-      }, 1000);
+      }, 4000);
     }
   }, [slowLoading]);
 
@@ -58,6 +59,10 @@ function App() {
         <Route
           path="/poker"
           element={<Poker setSlowLoading={setSlowLoading} />}
+        />
+        <Route
+          path="/blackjack"
+          element={<BlackJack setSlowLoading={setSlowLoading} />}
         />
         <Route path="/showcards" element={<ShowCards />} />
         <Route path="/addfunds" element={<AddFunds />} />
