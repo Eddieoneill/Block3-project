@@ -5,7 +5,13 @@ import AppContext from "../context/AppContext";
 import post from "../support/post";
 import { useNavigate } from "react-router-dom";
 
-function Card({ setPlayerCard, card, rotate, cardName = "card2" }) {
+function Card({
+  setPlayerCard,
+  card,
+  rotate,
+  cardName = "card2",
+  setCardClicked = null,
+}) {
   const backCardImage = "/BackCardImage.png";
   const eRef = useRef(null);
   const [elementRef, setElementRef] = useState(null);
@@ -21,6 +27,10 @@ function Card({ setPlayerCard, card, rotate, cardName = "card2" }) {
   useEffect(() => {}, [rotate]);
 
   const cardClicked = () => {
+    if (setCardClicked) {
+      setCardClicked(card.image);
+      return;
+    }
     if (!rotate) return;
     playCardFlipSound();
     if (elementRef.current.className === "card-sleeve2 flipped") {
@@ -32,7 +42,7 @@ function Card({ setPlayerCard, card, rotate, cardName = "card2" }) {
 
   if (!card) return;
   return (
-    <div ref={eRef} className="card-sleeve2" onClick={cardClicked}>
+    <div id={card.id} ref={eRef} className="card-sleeve2" onClick={cardClicked}>
       <div className="card-sleeve-inner2">
         <div className="front2">
           <img className={cardName} src={backCardImage} alt="backCard" />

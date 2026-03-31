@@ -5,3 +5,10 @@
   justify-content: center;
   margin-top: 10px;
 }
+
+.selected-image {
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  height: 80vh;
+}
