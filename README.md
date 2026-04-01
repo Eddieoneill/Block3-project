@@ -1,5 +1,5 @@
 ## Description
-
+Basic Casino app where you can play poker, and blackjack agains a bot
 
 ### Setup
 - First ensure that you have docker installed in your terminal.
